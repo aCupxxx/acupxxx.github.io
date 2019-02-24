@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>CupCui</title>
+  
+  <subtitle>It&#39;s a blog made by CupCui just for 装X.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-02-23T14:17:21.132Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>崔杯杯</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CupCui</title>
+    <link href="http://yoursite.com/2019/02/23/CupCui/"/>
+    <id>http://yoursite.com/2019/02/23/CupCui/</id>
+    <published>2019-02-23T14:17:21.000Z</published>
+    <updated>2019-02-23T14:17:21.132Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/02/23/hello-world/"/>
+    <id>http://yoursite.com/2019/02/23/hello-world/</id>
+    <published>2019-02-23T11:51:32.082Z</published>
+    <updated>2019-02-23T14:39:53.716Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Hello, it’s my first blog and welcome to my blog.&lt;br&gt;By the way, I’m glad to grow with you.&lt;br&gt;   
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
