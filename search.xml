@@ -1,52 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[I Love You]]></title>
+    <title><![CDATA[Setup a Blog with Hexo and GitHub Pages]]></title>
     <url>%2F2019%2F02%2F24%2FI-Love-You%2F</url>
-    <content type="text"><![CDATA[woooooooooooooooowClick http://localhost:4000 to confir.]]></content>
+    <content type="text"><![CDATA[Local - Hexo SiteReference: Hexo and its documentation. Hexo is a blog framework based on Node.js. In this article, we will initialize a Hexo site on local disk, and talk about how to publish it to GitHub Pages, which would use Git indirectly.Prepare EnvironmentOn Arch Linux, you need just one command to do all the work below with your favorite AUR helper: $ yay -Syu nodejs-hexo-cli gitThen you can skip to initialize site step. Yes this is showing off, it’s not that simple on most of other platforms. Node.jsGo to Download | Node.js, choose and install the latest 64-bit LTS version. After installation, run node -v and npm -v to verify both Node.js enviornment and its package manager: Verify Node.js GitClick this official link to download and install. VS Code is recommended for default editor, leave other options default if you don’t understand, all these stuff could be configured when needed later. Run git –version to verify installation: Verify Git Then config the user name and email, the latter should be the same as your GitHub commit email. $ git config –global user.name “Your Name”$ git config –global user.email your.mail@example.comHexoRun npm i -g hexo-cli and hexo version to install and verify Hexo. There may be two warnings like below, saying that an optional dependency named fsevent was skipped since it’s macOS only (npm, you have to say, huh?). We can just ignore this. Install and Veify Hexo Initialize Hexo SiteChange to your prefered directory, and run hexo init name (use your prefered name) and npm install to establish site and update dependencies. You can also make an empty subdirectory and run hexo init and npm install in it, I applied this method below: Initialize Hexo Site Now we got a local folder containing a default blog’s source. I wrote another article for modifiying it, see Customize Hexo Blog with NexT Theme. Preview BlogIn site directory run hexo server or its abbreviation hexo s to start the local server. You can also run hexo s -i 192.168.. (use your PC’s LAN IP) if want to preview on other devices in LAN like phones. If you want to change the port or if you’re encountering EADDRINUSE errors, use the -p option to set a different port. According to output, visit http://localhost:4000: Preview Blog Preview operating would be frequent when managing blog, you may consider to write a script to save time. Online - GitHub PagesWhat is GitHub Pages? —— GitHub Pages is a static site hosting service designed to host your personal，organization，or project pages directly from a GitHub repository. Of course Hexo is a static blog framework and we already have a Hexo site on local disk, now we got to create a particular repository and configure a bit more, soon we’ll arrive at “username.github.io” online. Create Dedicated RepositoryRepository naming scheme refers to User and Organization Pages sites. Create a new repository like below, replace username with your own (same as Owner on the left). Create Dedicated Repository Publish Blog OnlineThis chapter is left for reference only: I’m managing blog in a better workflow, including auto deployment, see here: Manage Hexo Blog with Git and Travis CI. Reference: Deployment | Hexo Install Deployer PluginRun npm i –save hexo-deployer-git in site folder. Deployment ConfigurationOpen site configuration file _config.yml, find deploy: part and edit: deploy: type: git repo: https://github.com/username/username.github.io # use your own username branch: masterPay attention to syntax of YAML: the colon must be followed by a space. First DeploymentIn site folder run hexo deploy –generate or its abbreviation hexo d -g, this let Hexo deploy blog to repository after generating the static files.]]></content>
       <categories>
-        <category>git</category>
+        <category>-Hexo博客</category>
       </categories>
       <tags>
-        <tag>hub</tag>
+        <tag>-NexT主题</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[tags]]></title>
+    <title><![CDATA[Bézier 曲线及其 deCasteljau 剖分算法]]></title>
     <url>%2F2019%2F02%2F24%2Ftags%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[Bézier 曲线一条 n 次 Bézier 曲线可以表示为：R(t)=∑ni=0RiBi,n(t),0≤t≤1，其中： Ri 是控制顶点，我们可以看出，一条 n 次 Bézier 曲线有 n+1 个控制顶点，即 n 次 n+1 阶曲线；Bi,n(t) 是 Bernstein 基函数，定义为：Bi,n(t)=Cin(1−t)n−iti，其中 Cin 为二项式系数 Cin=n!i!(n−i)!。两点特性： 从几何意义上看，当参数 t=0 时，对应的是曲线的第 0 个控制顶点; 而当参数 t=1 时，对应的是曲线的第 n 个控制顶点。这就是 Bézier 曲线的端点插值特性，即 R(0)=R0，R(1)=Rn；由于二项式系数的对称特性 Cin=Cn−in， Bézier 曲线控制顶点的也具有几何地位上的对称性，即 ∑iRiBi,n(t)=∑iRn−iBi,n(t)。Bézier 曲线还有其他的性质，这里就不展开讨论了。下面重点讲一下如何求 Bézier 曲线的任意点。 按曲线定义求值按照定义公式求 Bézier 曲线上参数 t 对应点的过程，就是对这 n+1 个控制顶点各分量（比如二维时即横纵坐标分量）经由 Bernstein 基函数进行混合后累加，最终得到参数 t 对应点坐标。 从上一节里我们可以看出，在用定义求值的过程中，涉及到的运算有阶乘和乘幂。当曲线次数很低时，这看起来是很简单的，但当曲线次数上升，数值稳定性就炸了。对应的一套代码我也写了一遍，就不贴上来丢人了，光是一个乘幂函数就经不起数值稳定性考验。 deCasteljau 剖分算法求值deCasteljau 剖分算法是在实际应用中对 Bézier 曲线进行求值以及逼近绘制等操作所使用的算法。相比前面的定义求值法，它更加快速且稳定，更贴近 Bézier 曲线特性。 deCasteljau 算法的核心内容是线性插值（Linear interpolation）。那什么是线性插值呢? 线性 Bézier 曲线两点一线，控制多边形恰好是一条线段，即是最简单的线性曲线。 线性曲线 此时原始公式特化为：R(t)=(1−t)R0+tR1这——就是线性插值. 二次 Bézier 曲线三点两线，控制多边形有两条线段，便是二次曲线。 二次曲线 此时我们需要 3 次线性插值才能得到 R(t) : R(1)0=(1−t)R0+tR1R(1)1=(1−t)R1+tR2R(t)=R(2)0=(1−t)R(1)0+tR(1)1其中 R(1)0​ 是上图中左边的绿点，R(1)1​ 则是右边的绿点。 更高次的情况我这里只继续搬运一些动画，感受一下如何逐渐推广。 三次曲线：三次曲线 四次曲线：四次曲线 五次曲线：五次曲线 以上动画取自：贝塞尔曲线 - 维基百科。 推广从最开始的线性一次曲线，到二次，再到更高次，我们发现：只要对控制多边形上的各个线段当成线性曲线进行线性插值，就会得到更少的点和线段，只要重复进行线性插值，无论多少次的曲线，最终都会出现三次，二次，最终得到一个线性曲线。此时再进行最后一次线性插值，我们就得到了想要的点。 这个线性插值的重复过程我参考了很多资料后觉得还是用下图中的金字塔模型来描述最形象，自下而上，最后得到塔顶即是所求的点。 deCasteljau 金字塔模型 以下代码仅为 deCasteljau 算法求值的示例代码，头文件的具体实现取决于该函数的需求: #include”Point.h” // 二维坐标点 #include”Bezier.h” // Bezier 曲线 #include&lt;assert.h&gt;Point deCasteljauEval(const Bezier&amp; R, double t){ assert(R.getOrder()); // 确保曲线存在（阶数大于零） int n = R.getOrder() - 1; // 曲线次数 n Point * P = new Point[n + 1]; // 为金字塔申请 n+1 层 for (int i = 0; i &lt;= n; i++) // 为每一层金字塔申请内存 { P[i] = new Point[n - i + 1]; // 第 0 层长度为 n+1 并逐层递减至 1 P[0][i] = R[i]; // 第 0 层填入曲线 R 的 n+1 个控制顶点 } for (int s = 1; s &lt;= n; s++) // 遍历第 1~n 层金字塔 for (int i = 0; i &lt;= n - s; i++) // 第 s 层长度为 n-s+1 { // 第 s 层第 i 点由下层的第 i 跟 i+1 点线性插值得出 P[s][i] = (1 - t) P[s - 1][i] + (t) P[s - 1][i + 1]; } Point Rt = P[n][0]; // 得到金字塔顶的点，即曲线上参数 t 对应的点 R(t) for (int i = 0; i &lt;= n; i++) delete[]P[i]; delete[]P; // 释放内存 return Rt;}]]></content>
       <categories>
-        <category>Diary</category>
+        <category>经典数学</category>
       </categories>
       <tags>
-        <tag>PS3</tag>
-        <tag>Games</tag>
+        <tag>Bézier 曲线</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[github]]></title>
+    <title><![CDATA[Gogs与主机共享22端口]]></title>
     <url>%2F2019%2F02%2F24%2Fgithub%2F</url>
-    <content type="text"><![CDATA[hello, github.]]></content>
+    <content type="text"><![CDATA[在使用Docker安装Gogs时，一般会把容器的22端口映射到主机的其它端口(比如10022)在以SSH方式clone项目时，URL长这样 ssh://git@git.example.com:10022:username/project.git 但我们想要的是类似于GitHub那样的，这时需要把Gogs的SSH端口设置为22 git@git.example.com:username/project.git 下面说一下主要步骤创建git用户[root]$ useradd git[root]$ id git # 获取uid和giduid=1002(git) gid=1002(git) groups=1002(git)[root]$ usermod -aG docker git # 把git用户加入docker组[root]$ su git[git]$ mkdir -p ~/gogs/data # 在git用户下创建gogs/data文件夹，作为gogs容器主要数据的挂载目录安装Gogs[git]$ docker run -d –name=gogs -p 10022:22 -p 10080:3000 -v ~/gogs/data:/data -e “PUID=1002” -e “PGID=1002” –restart=always gogs/gogs # PUID PGID与上面获取的uid gid保持一致[git]$ ln -s ~/gogs/data/git/.ssh ~/ # 将gogs的.ssh目录软连接到本地的.ssh现在可以通过服务器外网ip:10080进入安装页面，也可以等反代设置好后通过域名进行访问我用的数据库是Sqlite3，不需要额外配置，如果你选择的是其它数据库，可以参考这篇文章相关配置可以参考官方文档 生成SSH key[git]$ ssh-keygen -t rsa -b 4096 -C “git@git.example.com“[git]$ cd ~/.ssh[git]$ cat id_rsa.pub &gt;&gt; authorized_keys[git]$ chmod 600 authorized_keys在authorized_keys最前面添加 no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty ssh-rsa AAAAB3NzaC1y……….YGedddqAN6w== git@git.example.comCaddy反向代理[root]$ mkdir caddy &amp;&amp; cd $_在caddy目录下创建Caddyfile文件，下面是参考配置 git.example.com { tls git@example.com # 填写你的邮箱，用于申请证书 proxy / your-ip:10080 header / Strict-Transport-Security “max-age=31536000;” # 开启HSTS gzip}启动caddy[root]$ docker run -d –name=caddy -v ~/caddy/Caddyfile:/etc/Caddyfile -v ~/.caddy:/root/.caddy -p 80:80 -p 443:443 –restart=always abiosoft/caddy配置git用户登录问题[root]$ mkdir -p /app/gogs/[root]$ cat &gt;/app/gogs/gogs &lt;&lt;’END’ #!/bin/shssh -p 10022 -o StrictHostKeyChecking=no git@127.0.0.1 \“SSH_ORIGINAL_COMMAND=\”$SSH_ORIGINAL_COMMAND\” $0 $@”END[root]$ chmod 755 /app/gogs/gogs这样就差不多完成了，下面需要在本地生成SSH密匙，然后在web端把密匙添加到Gogs如果需要修改Gogs的配置，比如安装的时候DOMAIN写的IP现在要修改为域名，可以到/home/git/gogs/data/gogs/conf/找到app.ini，修改完后重启gogs容器]]></content>
       <categories>
-        <category>web前端</category>
+        <category>Git</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>Git技术</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CupCui]]></title>
+    <title><![CDATA[如何下載 YouTube 影片 (原理)]]></title>
     <url>%2F2019%2F02%2F23%2FCupCui%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[只要 google YouTube 下載 隨便就能找到很多網站讓你能下載影片不過我不久前就很好奇要怎樣才能取得 yt 影片的真實網站，因此就花了點時間去研究原理 而我最後把它做成一個簡單的 api 伺服器，改一下應該也能當成 npm module 來發布GitHub: maple3142/ytdl 而這篇文章會簡單的講是怎麼下載 yt 影片的取得影片資訊YouTube 官方有個 api 叫 get_video_info 可以取得一些影片的資訊，裡面當然也包括了影片網址 http://www.youtube.com/get_video_info?video_id=VIDEOID&amp;el=embedded&amp;ps=default&amp;eurl=&amp;gl=US&amp;hl=en裡面的 VIDEOID 是指影片的 id例如 https://www.youtube.com/watch?v=-tKVN2mAKRI 的 id 是 -tKVN2mAKRI 在裡面會得到一串奇怪的文字，不過它的格式實際上就是 querystring 的格式像是 key=value&amp;key2=value2 之類的 而在解析出來的物件中會得到許多 key-value pair，其中兩個需要用到的是 url_encoded_fmt_stream_map 和 adaptive_fmts url_encoded_fmt_stream_map 中是一個使用 , 分隔的字串，其中每個片段又是一個 querystring格式大概如下: { “sp”: “signature”, “quality”: “hd720”, “itag”: “22”, “url”: “https://….”, “type”: “video/mp4;+codecs=\”avc1.64001F,+mp4a.40.2\””, “s”: “XXXXXXXXXXXXX”}其中有 url，你可能會很直接的以為那個 url 就是真實的的影片網址不過他在 sp 中沒有 signature 時確實就是真實的影片網址，但是如果有的話你會得到 http code 403這是因為有 signature 表示這個影片是有加密的，被加密過的字串就是其中的 s，而關於解密部分會在下面講 而我上面說的 adaptive_fmts 的格式其實和 url_encoded_fmt_stream_map 是一樣的，不過它的內容是不一樣的裡面都是一些沒有聲音的影片和純音樂檔，是代表著分離的影片與音樂 而關於要怎麼 parse 這些資料的範例可以參考: getvid.js 解密 signature打開任何一個 yt 影片然後打開 devtool(開發人員工具) ，然後找到一個在 player 底下的 base.js 然後在裡面搜尋 signature，在第一個 match 能看到像是下面的函數，其中的 Ty 函數(也有可能是其他名稱)就是解密 signature 的函數了 左下角有個按鈕長 {}，滑鼠放上去會顯示 Pretty Print，可以幫你 format 整個 js 在上面設置一個 breakpoint，然後重新整理頁面能在右側的 Scope&gt;Closure 中看到很多東西 在裡面找到 Ty 並展開，然後點擊 [[FunctionLocation]] devtool 接下來會跳到 Ty 函數的定義，大概長下面這樣 Ty = function(a) { a = a.split(“”); Sy.Ug(a, 2); Sy.ZK(a, 72); Sy.Ug(a, 2); Sy.ZK(a, 10); Sy.Ug(a, 3); Sy.kJ(a, 60); return a.join(“”)}其中會看到一個東西叫 Sy，雖然它一樣也能在 Scope&gt;Closure 中找到，但是你沒辦法用 [[FunctionLocation]] 跳到那邊 這時候使用 Ctrl+F 搜尋 var Sy 就能很容易的找到 Sy 的定義位置，內容也大概如下 如果名稱不是 Sy，請自己替換 var Sy = { kJ: function(a, b) { var c = a[0]; a[0] = a[b % a.length]; a[b % a.length] = c }, ZK: function(a) { a.reverse() }, Ug: function(a, b) { a.splice(0, b) }};基本上 Ty 函數和 Sy 物件就是整個解密函數的運作原理，可以用它來把前面得到的 signature 解密 然後在 url 後面加上 &amp;signature=解密後的signature 就是真正的網址，可以用瀏覽器直接瀏覽看看 不過這東西並不是只做一次就好，因為這個加密方法還不時會更改，當你發現解密後還是失效時就請重新尋找解密函數 但是我有點懶，所以我就用 js 模擬了我剛做的所有事情，來幫我自動找出解密函數: decsig.js]]></content>
+      <categories>
+        <category>研究</category>
+      </categories>
+      <tags>
+        <tag>工具使用</tag>
+      </tags>
   </entry>
   <entry>
-    <title><![CDATA[hello]]></title>
+    <title><![CDATA[NexT主题优化：重构leancloud阅读量统计模块]]></title>
     <url>%2F2019%2F02%2F23%2Fhello%2F</url>
-    <content type="text"><![CDATA[Hello, this is hello.md.]]></content>
+    <content type="text"><![CDATA[为什么要重构从去年 10 月份开始，LeanCloud 国内节点 API 的老版域名 api.leancloud.cn 在国外一些地区和国内少数地区会出现一定概率的解析错误（DNS 污染），这导致我们的博客阅读量无法正常显示 官方解决方案如果使用的是原生 SDK，请尽快升级到以下版本：Android 3.16.4 及更高版本iOS 5.0.0 及更高版本JavaScript 3.0.0 及更高版本如果使用 REST API 来访问 api.leancloud.cn，请通过以下地址来动态获取应用专属的二级域名： https://app-router.leancloud.cn/2/route?appId= &lt;替换为 appId&gt; 然后使用 api_server 指示的域名来访问我们的 API 服务，即可正常获得结果。 NexT 主题里使用的 SDK 是 av-core-mini-0.6.4，这个库 gzip 后有 28.5KB对于一个只有几个请求的小模块来说，完全没必要用 SDK，可以手动请求官方 API 完成目的 重构后的代码可以到我的GitHub查看]]></content>
+      <categories>
+        <category>-Hexo博客</category>
+      </categories>
+      <tags>
+        <tag>-NexT主题</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F02%2F23%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Hello, it’s my first blog and welcome to my blog.By the way, I’m glad to grow with you. 22:34]]></content>
+    <content type="text"><![CDATA[Hello, it’s my first blog and welcome to my blog.By the way, I’m glad to grow with you.]]></content>
   </entry>
 </search>

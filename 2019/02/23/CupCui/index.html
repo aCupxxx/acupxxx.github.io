@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="工具使用,">
 
 
 
@@ -105,14 +105,18 @@
 
 
 
+<meta name="description" content="只要 google YouTube 下載 隨便就能找到很多網站讓你能下載影片不過我不久前就很好奇要怎樣才能取得 yt 影片的真實網站，因此就花了點時間去研究原理 而我最後把它做成一個簡單的 api 伺服器，改一下應該也能當成 npm module 來發布GitHub: maple3142/ytdl 而這篇文章會簡單的講是怎麼下載 yt 影片的">
+<meta name="keywords" content="工具使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CupCui">
+<meta property="og:title" content="如何下載 YouTube 影片 (原理)">
 <meta property="og:url" content="http://yoursite.com/2019/02/23/CupCui/index.html">
 <meta property="og:site_name" content="CupCui">
+<meta property="og:description" content="只要 google YouTube 下載 隨便就能找到很多網站讓你能下載影片不過我不久前就很好奇要怎樣才能取得 yt 影片的真實網站，因此就花了點時間去研究原理 而我最後把它做成一個簡單的 api 伺服器，改一下應該也能當成 npm module 來發布GitHub: maple3142/ytdl 而這篇文章會簡單的講是怎麼下載 yt 影片的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-23T14:17:21.132Z">
+<meta property="og:updated_time" content="2019-02-25T09:37:51.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CupCui">
+<meta name="twitter:title" content="如何下載 YouTube 影片 (原理)">
+<meta name="twitter:description" content="只要 google YouTube 下載 隨便就能找到很多網站讓你能下載影片不過我不久前就很好奇要怎樣才能取得 yt 影片的真實網站，因此就花了點時間去研究原理 而我最後把它做成一個簡單的 api 伺服器，改一下應該也能當成 npm module 來發布GitHub: maple3142/ytdl 而這篇文章會簡單的講是怎麼下載 yt 影片的">
 
 
 
@@ -148,7 +152,7 @@
 
 
 
-  <title>CupCui | CupCui</title>
+  <title>如何下載 YouTube 影片 (原理) | CupCui</title>
   
 
 
@@ -334,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CupCui</h1>
+          <h1 class="post-title" itemprop="name headline">如何下載 YouTube 影片 (原理)</h1>
         
 
         <div class="post-meta">
@@ -356,6 +360,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/研究/" itemprop="url" rel="index">
+                    <span itemprop="name">研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -389,7 +415,31 @@
       
 
       
-        
+        <p>只要 google YouTube 下載 隨便就能找到很多網站讓你能下載影片<br>不過我不久前就很好奇要怎樣才能取得 yt 影片的真實網站，因此就花了點時間去研究原理</p>
+<p>而我最後把它做成一個簡單的 api 伺服器，改一下應該也能當成 npm module 來發布<br>GitHub: maple3142/ytdl</p>
+<p>而這篇文章會簡單的講是怎麼下載 yt 影片的<br><a id="more"></a><br>取得影片資訊<br>YouTube 官方有個 api 叫 get_video_info 可以取得一些影片的資訊，裡面當然也包括了影片網址</p>
+<p><a href="http://www.youtube.com/get_video_info?video_id=VIDEOID&amp;el=embedded&amp;ps=default&amp;eurl=&amp;gl=US&amp;hl=en" target="_blank" rel="noopener">http://www.youtube.com/get_video_info?video_id=VIDEOID&amp;el=embedded&amp;ps=default&amp;eurl=&amp;gl=US&amp;hl=en</a><br>裡面的 VIDEOID 是指影片的 id<br>例如 <a href="https://www.youtube.com/watch?v=-tKVN2mAKRI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=-tKVN2mAKRI</a> 的 id 是 -tKVN2mAKRI</p>
+<p>在裡面會得到一串奇怪的文字，不過它的格式實際上就是 querystring 的格式<br>像是 key=value&amp;key2=value2 之類的</p>
+<p>而在解析出來的物件中會得到許多 key-value pair，其中兩個需要用到的是 url_encoded_fmt_stream_map 和 adaptive_fmts</p>
+<p>url_encoded_fmt_stream_map 中是一個使用 , 分隔的字串，其中每個片段又是一個 querystring<br>格式大概如下:</p>
+<p>{<br>  “sp”: “signature”,<br>  “quality”: “hd720”,<br>  “itag”: “22”,<br>  “url”: “https://….”,<br>  “type”: “video/mp4;+codecs=\”avc1.64001F,+mp4a.40.2\””,<br>  “s”: “XXXXXXXXXXXXX”<br>}<br>其中有 url，你可能會很直接的以為那個 url 就是真實的的影片網址<br>不過他在 sp 中沒有 signature 時確實就是真實的影片網址，但是如果有的話你會得到 http code 403<br>這是因為有 signature 表示這個影片是有加密的，被加密過的字串就是其中的 s，而關於解密部分會在下面講</p>
+<p>而我上面說的 adaptive_fmts 的格式其實和 url_encoded_fmt_stream_map 是一樣的，不過它的內容是不一樣的<br>裡面都是一些沒有聲音的影片和純音樂檔，是代表著分離的影片與音樂</p>
+<p>而關於要怎麼 parse 這些資料的範例可以參考: getvid.js</p>
+<p>解密 signature<br>打開任何一個 yt 影片然後打開 devtool(開發人員工具) ，然後找到一個在 player 底下的 base.js</p>
+<p>然後在裡面搜尋 signature，在第一個 match 能看到像是下面的函數，其中的 Ty 函數(也有可能是其他名稱)就是解密 signature 的函數了</p>
+<p>左下角有個按鈕長 {}，滑鼠放上去會顯示 Pretty Print，可以幫你 format 整個 js</p>
+<p>在上面設置一個 breakpoint，然後重新整理頁面能在右側的 Scope&gt;Closure 中看到很多東西</p>
+<p>在裡面找到 Ty 並展開，然後點擊 [[FunctionLocation]]</p>
+<p>devtool</p>
+<p>接下來會跳到 Ty 函數的定義，大概長下面這樣</p>
+<p>Ty = function(a) {<br>  a = a.split(“”);<br>  Sy.Ug(a, 2);<br>  Sy.ZK(a, 72);<br>  Sy.Ug(a, 2);<br>  Sy.ZK(a, 10);<br>  Sy.Ug(a, 3);<br>  Sy.kJ(a, 60);<br>  return a.join(“”)<br>}<br>其中會看到一個東西叫 Sy，雖然它一樣也能在 Scope&gt;Closure 中找到，但是你沒辦法用 [[FunctionLocation]] 跳到那邊</p>
+<p>這時候使用 Ctrl+F 搜尋 var Sy 就能很容易的找到 Sy 的定義位置，內容也大概如下</p>
+<p>如果名稱不是 Sy，請自己替換</p>
+<p>var Sy = {<br>  kJ: function(a, b) {<br>    var c = a[0];<br>    a[0] = a[b % a.length];<br>    a[b % a.length] = c<br>  },<br>  ZK: function(a) {<br>    a.reverse()<br>  },<br>  Ug: function(a, b) {<br>    a.splice(0, b)<br>  }<br>};<br>基本上 Ty 函數和 Sy 物件就是整個解密函數的運作原理，可以用它來把前面得到的 signature 解密</p>
+<p>然後在 url 後面加上 &amp;signature=解密後的signature 就是真正的網址，可以用瀏覽器直接瀏覽看看</p>
+<p>不過這東西並不是只做一次就好，因為這個加密方法還不時會更改，當你發現解密後還是失效時就請重新尋找解密函數</p>
+<p>但是我有點懶，所以我就用 js 模擬了我剛做的所有事情，來幫我自動找出解密函數: decsig.js</p>
+
       
     </div>
     
@@ -428,6 +478,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/工具使用/" rel="tag"><i class="fa fa-tag"></i>工具使用</a>
+          
+        </div>
+      
 
       
       
@@ -437,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/23/hello/" rel="next" title="hello">
-                <i class="fa fa-chevron-left"></i> hello
+              <a href="/2019/02/23/hello/" rel="next" title="NexT主题优化：重构leancloud阅读量统计模块">
+                <i class="fa fa-chevron-left"></i> NexT主题优化：重构leancloud阅读量统计模块
               </a>
             
           </div>
@@ -447,8 +503,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/24/github/" rel="prev" title="github">
-                github <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/24/github/" rel="prev" title="Gogs与主机共享22端口">
+                Gogs与主机共享22端口 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,7 +586,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -587,7 +643,7 @@
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
                 友情链接
@@ -600,6 +656,10 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://www.wikipedia.org/" title="Wikipedia" target="_blank">Wikipedia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.gatesfoundation.org.cn/zh/" title="Gatesfundation" target="_blank">Gatesfundation</a>
                   </li>
                 
               </ul>

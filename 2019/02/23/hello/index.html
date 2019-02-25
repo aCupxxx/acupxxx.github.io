@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="-NexT主题,">
 
 
 
@@ -105,17 +105,18 @@
 
 
 
-<meta name="description" content="Hello, this is hello.md.">
+<meta name="description" content="为什么要重构从去年 10 月份开始，LeanCloud 国内节点 API 的老版域名 api.leancloud.cn 在国外一些地区和国内少数地区会出现一定概率的解析错误（DNS 污染），这导致我们的博客阅读量无法正常显示 官方解决方案如果使用的是原生 SDK，请尽快升级到以下版本：">
+<meta name="keywords" content="-NexT主题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello">
+<meta property="og:title" content="NexT主题优化：重构leancloud阅读量统计模块">
 <meta property="og:url" content="http://yoursite.com/2019/02/23/hello/index.html">
 <meta property="og:site_name" content="CupCui">
-<meta property="og:description" content="Hello, this is hello.md.">
+<meta property="og:description" content="为什么要重构从去年 10 月份开始，LeanCloud 国内节点 API 的老版域名 api.leancloud.cn 在国外一些地区和国内少数地区会出现一定概率的解析错误（DNS 污染），这导致我们的博客阅读量无法正常显示 官方解决方案如果使用的是原生 SDK，请尽快升级到以下版本：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-24T09:13:16.810Z">
+<meta property="og:updated_time" content="2019-02-25T09:41:08.054Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello">
-<meta name="twitter:description" content="Hello, this is hello.md.">
+<meta name="twitter:title" content="NexT主题优化：重构leancloud阅读量统计模块">
+<meta name="twitter:description" content="为什么要重构从去年 10 月份开始，LeanCloud 国内节点 API 的老版域名 api.leancloud.cn 在国外一些地区和国内少数地区会出现一定概率的解析错误（DNS 污染），这导致我们的博客阅读量无法正常显示 官方解决方案如果使用的是原生 SDK，请尽快升级到以下版本：">
 
 
 
@@ -151,7 +152,7 @@
 
 
 
-  <title>hello | CupCui</title>
+  <title>NexT主题优化：重构leancloud阅读量统计模块 | CupCui</title>
   
 
 
@@ -337,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hello</h1>
+          <h1 class="post-title" itemprop="name headline">NexT主题优化：重构leancloud阅读量统计模块</h1>
         
 
         <div class="post-meta">
@@ -359,6 +360,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo博客/" itemprop="url" rel="index">
+                    <span itemprop="name">-Hexo博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -392,7 +415,12 @@
       
 
       
-        <p>Hello, this is hello.md.</p>
+        <p>为什么要重构<br>从去年 10 月份开始，LeanCloud 国内节点 API 的老版域名 api.leancloud.cn 在国外一些地区和国内少数地区会出现一定概率的解析错误（DNS 污染），这导致我们的博客阅读量无法正常显示</p>
+<p>官方解决方案<br>如果使用的是原生 SDK，请尽快升级到以下版本：<br><a id="more"></a><br>Android 3.16.4 及更高版本<br>iOS 5.0.0 及更高版本<br>JavaScript 3.0.0 及更高版本<br>如果使用 REST API 来访问 api.leancloud.cn，请通过以下地址来动态获取应用专属的二级域名：</p>
+<p><a href="https://app-router.leancloud.cn/2/route?appId=" target="_blank" rel="noopener">https://app-router.leancloud.cn/2/route?appId=</a> &lt;替换为 appId&gt;</p>
+<p>然后使用 api_server 指示的域名来访问我们的 API 服务，即可正常获得结果。</p>
+<p>NexT 主题里使用的 SDK 是 av-core-mini-0.6.4，这个库 gzip 后有 28.5KB<br>对于一个只有几个请求的小模块来说，完全没必要用 SDK，可以手动请求官方 API 完成目的</p>
+<p>重构后的代码可以到我的GitHub查看</p>
 
       
     </div>
@@ -432,6 +460,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/NexT主题/" rel="tag"><i class="fa fa-tag"></i>-NexT主题</a>
+          
+        </div>
+      
 
       
       
@@ -451,8 +485,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/23/CupCui/" rel="prev" title="CupCui">
-                CupCui <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/23/CupCui/" rel="prev" title="如何下載 YouTube 影片 (原理)">
+                如何下載 YouTube 影片 (原理) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -534,7 +568,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -591,7 +625,7 @@
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
                 友情链接
@@ -604,6 +638,10 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://www.wikipedia.org/" title="Wikipedia" target="_blank">Wikipedia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.gatesfoundation.org.cn/zh/" title="Gatesfundation" target="_blank">Gatesfundation</a>
                   </li>
                 
               </ul>

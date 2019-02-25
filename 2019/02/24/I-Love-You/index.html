@@ -92,7 +92,7 @@
 
 
 
-  <meta name="keywords" content="hub,">
+  <meta name="keywords" content="-NexT主题,">
 
 
 
@@ -105,18 +105,18 @@
 
 
 
-<meta name="description" content="woooooooooooooooowClick http://localhost:4000 to confir.">
-<meta name="keywords" content="hub">
+<meta name="description" content="Local - Hexo SiteReference: Hexo and its documentation. Hexo is a blog framework based on Node.js. In this article, we will initialize a Hexo site on local disk, and talk about how to publish it to Gi">
+<meta name="keywords" content="-NexT主题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="I Love You">
+<meta property="og:title" content="Setup a Blog with Hexo and GitHub Pages">
 <meta property="og:url" content="http://yoursite.com/2019/02/24/I-Love-You/index.html">
 <meta property="og:site_name" content="CupCui">
-<meta property="og:description" content="woooooooooooooooowClick http://localhost:4000 to confir.">
+<meta property="og:description" content="Local - Hexo SiteReference: Hexo and its documentation. Hexo is a blog framework based on Node.js. In this article, we will initialize a Hexo site on local disk, and talk about how to publish it to Gi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-24T12:32:31.933Z">
+<meta property="og:updated_time" content="2019-02-25T09:43:18.913Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="I Love You">
-<meta name="twitter:description" content="woooooooooooooooowClick http://localhost:4000 to confir.">
+<meta name="twitter:title" content="Setup a Blog with Hexo and GitHub Pages">
+<meta name="twitter:description" content="Local - Hexo SiteReference: Hexo and its documentation. Hexo is a blog framework based on Node.js. In this article, we will initialize a Hexo site on local disk, and talk about how to publish it to Gi">
 
 
 
@@ -152,7 +152,7 @@
 
 
 
-  <title>I Love You | CupCui</title>
+  <title>Setup a Blog with Hexo and GitHub Pages | CupCui</title>
   
 
 
@@ -338,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">I Love You</h1>
+          <h1 class="post-title" itemprop="name headline">Setup a Blog with Hexo and GitHub Pages</h1>
         
 
         <div class="post-meta">
@@ -373,8 +373,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/categories/Hexo博客/" itemprop="url" rel="index">
+                    <span itemprop="name">-Hexo博客</span>
                   </a>
                 </span>
 
@@ -415,7 +415,38 @@
       
 
       
-        <p>woooooooo<br>oooooooow<br>Click <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> to confir.</p>
+        <p>Local - Hexo Site<br>Reference: Hexo and its documentation.</p>
+<p>Hexo is a blog framework based on Node.js. In this article, we will initialize a Hexo site on local disk, and talk about how to publish it to GitHub Pages, which would use Git indirectly.<br><a id="more"></a><br>Prepare Environment<br>On Arch Linux, you need just one command to do all the work below with your favorite AUR helper:</p>
+<p>$ yay -Syu nodejs-hexo-cli git<br>Then you can skip to initialize site step.</p>
+<p>Yes this is showing off, it’s not that simple on most of other platforms.</p>
+<p>Node.js<br>Go to Download | Node.js, choose and install the latest 64-bit LTS version.</p>
+<p>After installation, run node -v and npm -v to verify both Node.js enviornment and its package manager:</p>
+<p>Verify Node.js</p>
+<p>Git<br>Click this official link to download and install. VS Code is recommended for default editor, leave other options default if you don’t understand, all these stuff could be configured when needed later.</p>
+<p>Run git –version to verify installation:</p>
+<p>Verify Git</p>
+<p>Then config the user name and email, the latter should be the same as your GitHub commit email.</p>
+<p>$ git config –global user.name “Your Name”<br>$ git config –global user.email <a href="mailto:your.mail@example.com" target="_blank" rel="noopener">your.mail@example.com</a><br>Hexo<br>Run npm i -g hexo-cli and hexo version to install and verify Hexo.</p>
+<p>There may be two warnings like below, saying that an optional dependency named fsevent was skipped since it’s macOS only (npm, you have to say, huh?). We can just ignore this.</p>
+<p>Install and Veify Hexo</p>
+<p>Initialize Hexo Site<br>Change to your prefered directory, and run hexo init name (use your prefered name) and npm install to establish site and update dependencies. You can also make an empty subdirectory and run hexo init and npm install in it, I applied this method below:</p>
+<p>Initialize Hexo Site</p>
+<p>Now we got a local folder containing a default blog’s source. I wrote another article for modifiying it, see Customize Hexo Blog with NexT Theme.</p>
+<p>Preview Blog<br>In site directory run hexo server or its abbreviation hexo s to start the local server. You can also run hexo s -i 192.168.<em>.</em> (use your PC’s LAN IP) if want to preview on other devices in LAN like phones. If you want to change the port or if you’re encountering EADDRINUSE errors, use the -p option to set a different port.</p>
+<p>According to output, visit <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a>:</p>
+<p>Preview Blog</p>
+<p>Preview operating would be frequent when managing blog, you may consider to write a script to save time.</p>
+<p>Online - GitHub Pages<br>What is GitHub Pages? —— GitHub Pages is a static site hosting service designed to host your personal，organization，or project pages directly from a GitHub repository.</p>
+<p>Of course Hexo is a static blog framework and we already have a Hexo site on local disk, now we got to create a particular repository and configure a bit more, soon we’ll arrive at “username.github.io” online.</p>
+<p>Create Dedicated Repository<br>Repository naming scheme refers to User and Organization Pages sites.</p>
+<p>Create a new repository like below, replace username with your own (same as Owner on the left).</p>
+<p>Create Dedicated Repository</p>
+<p>Publish Blog Online<br>This chapter is left for reference only: I’m managing blog in a better workflow, including auto deployment, see here: Manage Hexo Blog with Git and Travis CI.</p>
+<p>Reference: Deployment | Hexo</p>
+<p>Install Deployer Plugin<br>Run npm i –save hexo-deployer-git in site folder.</p>
+<p>Deployment Configuration<br>Open site configuration file _config.yml, find deploy: part and edit:</p>
+<p>deploy:<br>  type: git<br>  repo: <a href="https://github.com/username/username.github.io" target="_blank" rel="noopener">https://github.com/username/username.github.io</a>  # use your own username<br>  branch: master<br>Pay attention to syntax of YAML: the colon must be followed by a space.</p>
+<p>First Deployment<br>In site folder run hexo deploy –generate or its abbreviation hexo d -g, this let Hexo deploy blog to repository after generating the static files.</p>
 
       
     </div>
@@ -457,7 +488,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hub/" rel="tag"># hub</a>
+            <a href="/tags/NexT主题/" rel="tag"><i class="fa fa-tag"></i>-NexT主题</a>
           
         </div>
       
@@ -470,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/24/tags/" rel="next" title="tags">
-                <i class="fa fa-chevron-left"></i> tags
+              <a href="/2019/02/24/tags/" rel="next" title="Bézier 曲线及其 deCasteljau 剖分算法">
+                <i class="fa fa-chevron-left"></i> Bézier 曲线及其 deCasteljau 剖分算法
               </a>
             
           </div>
@@ -559,7 +590,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -616,7 +647,7 @@
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
               <div class="links-of-blogroll-title">
                 <i class="fa  fa-fw fa-link"></i>
                 友情链接
@@ -629,6 +660,10 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://www.wikipedia.org/" title="Wikipedia" target="_blank">Wikipedia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.gatesfoundation.org.cn/zh/" title="Gatesfundation" target="_blank">Gatesfundation</a>
                   </li>
                 
               </ul>

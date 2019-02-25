@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-24T12:32:31.933Z</updated>
+  <updated>2019-02-25T09:43:18.913Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,110 +17,111 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>I Love You</title>
+    <title>Setup a Blog with Hexo and GitHub Pages</title>
     <link href="http://yoursite.com/2019/02/24/I-Love-You/"/>
     <id>http://yoursite.com/2019/02/24/I-Love-You/</id>
     <published>2019-02-24T11:46:19.000Z</published>
-    <updated>2019-02-24T12:32:31.933Z</updated>
+    <updated>2019-02-25T09:43:18.913Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;woooooooo&lt;br&gt;oooooooow&lt;br&gt;Click &lt;a href=&quot;http://localhost:4000&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://localhost:4000&lt;/a&gt; to
-        
-      
+      &lt;p&gt;Local - Hexo Site&lt;br&gt;Reference: Hexo and its documentation.&lt;/p&gt;
+&lt;p&gt;Hexo is a blog framework based on Node.js. In this article, we will initialize a Hexo site on local disk, and talk about how to publish it to GitHub Pages, which would use Git indirectly.&lt;br&gt;
     
     </summary>
     
-      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+      <category term="-Hexo博客" scheme="http://yoursite.com/categories/Hexo%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="hub" scheme="http://yoursite.com/tags/hub/"/>
+      <category term="-NexT主题" scheme="http://yoursite.com/tags/NexT%E4%B8%BB%E9%A2%98/"/>
     
   </entry>
   
   <entry>
-    <title>tags</title>
+    <title>Bézier 曲线及其 deCasteljau 剖分算法</title>
     <link href="http://yoursite.com/2019/02/24/tags/"/>
     <id>http://yoursite.com/2019/02/24/tags/</id>
     <published>2019-02-24T11:39:29.000Z</published>
-    <updated>2019-02-24T11:43:46.984Z</updated>
+    <updated>2019-02-25T09:45:18.893Z</updated>
     
     <summary type="html">
     
+      &lt;p&gt;Bézier 曲线&lt;br&gt;一条 n 次 Bézier 曲线可以表示为：R(t)=∑ni=0RiBi,n(t),0≤t≤1，其中：&lt;/p&gt;
+&lt;p&gt;Ri 是控制顶点，我们可以看出，一条 n 次 Bézier 曲线有 n+1 个控制顶点，即 n 次 n+1 阶曲线；&lt;br&gt;Bi,n(t) 是 Bernstein 基函数，定义为：Bi,n(t)=Cin(1−t)n−iti，其中 Cin 为二项式系数 Cin=n!i!(n−i)!。&lt;br&gt;
+    
     </summary>
     
-      <category term="Diary" scheme="http://yoursite.com/categories/Diary/"/>
+      <category term="经典数学" scheme="http://yoursite.com/categories/%E7%BB%8F%E5%85%B8%E6%95%B0%E5%AD%A6/"/>
     
     
-      <category term="PS3" scheme="http://yoursite.com/tags/PS3/"/>
-    
-      <category term="Games" scheme="http://yoursite.com/tags/Games/"/>
+      <category term="Bézier 曲线" scheme="http://yoursite.com/tags/Bezier-%E6%9B%B2%E7%BA%BF/"/>
     
   </entry>
   
   <entry>
-    <title>github</title>
+    <title>Gogs与主机共享22端口</title>
     <link href="http://yoursite.com/2019/02/24/github/"/>
     <id>http://yoursite.com/2019/02/24/github/</id>
     <published>2019-02-24T11:18:37.000Z</published>
-    <updated>2019-02-24T11:37:41.377Z</updated>
+    <updated>2019-02-25T09:38:05.389Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;hello,
-        
-      
+      &lt;p&gt;在使用Docker安装Gogs时，一般会把容器的22端口映射到主机的其它端口(比如10022)&lt;br&gt;在以SSH方式clone项目时，URL长这样&lt;/p&gt;
+&lt;p&gt;ssh:&lt;a href=&quot;mailto://git@git.example.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;//git@git.example.com&lt;/a&gt;:10022:username/project.git&lt;/p&gt;
+&lt;p&gt;但我们想要的是类似于GitHub那样的，这时需要把Gogs的SSH端口设置为22&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;mailto:git@git.example.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;git@git.example.com&lt;/a&gt;:username/project.git&lt;/p&gt;
+&lt;p&gt;下面说一下主要步骤&lt;br&gt;
     
     </summary>
     
-      <category term="web前端" scheme="http://yoursite.com/categories/web%E5%89%8D%E7%AB%AF/"/>
+      <category term="Git" scheme="http://yoursite.com/categories/Git/"/>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="Git技术" scheme="http://yoursite.com/tags/Git%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
   <entry>
-    <title>CupCui</title>
+    <title>如何下載 YouTube 影片 (原理)</title>
     <link href="http://yoursite.com/2019/02/23/CupCui/"/>
     <id>http://yoursite.com/2019/02/23/CupCui/</id>
     <published>2019-02-23T14:17:21.000Z</published>
-    <updated>2019-02-23T14:17:21.132Z</updated>
+    <updated>2019-02-25T09:37:51.053Z</updated>
     
     <summary type="html">
     
+      &lt;p&gt;只要 google YouTube 下載 隨便就能找到很多網站讓你能下載影片&lt;br&gt;不過我不久前就很好奇要怎樣才能取得 yt 影片的真實網站，因此就花了點時間去研究原理&lt;/p&gt;
+&lt;p&gt;而我最後把它做成一個簡單的 api 伺服器，改一下應該也能當成 npm module 來發布&lt;br&gt;GitHub: maple3142/ytdl&lt;/p&gt;
+&lt;p&gt;而這篇文章會簡單的講是怎麼下載 yt 影片的&lt;br&gt;
+    
     </summary>
     
+      <category term="研究" scheme="http://yoursite.com/categories/%E7%A0%94%E7%A9%B6/"/>
+    
+    
+      <category term="工具使用" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
     
   </entry>
   
   <entry>
-    <title>hello</title>
+    <title>NexT主题优化：重构leancloud阅读量统计模块</title>
     <link href="http://yoursite.com/2019/02/23/hello/"/>
     <id>http://yoursite.com/2019/02/23/hello/</id>
     <published>2019-02-23T13:32:27.000Z</published>
-    <updated>2019-02-24T09:13:16.810Z</updated>
+    <updated>2019-02-25T09:41:08.054Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;Hello, this is
-        
-      
+      &lt;p&gt;为什么要重构&lt;br&gt;从去年 10 月份开始，LeanCloud 国内节点 API 的老版域名 api.leancloud.cn 在国外一些地区和国内少数地区会出现一定概率的解析错误（DNS 污染），这导致我们的博客阅读量无法正常显示&lt;/p&gt;
+&lt;p&gt;官方解决方案&lt;br&gt;如果使用的是原生 SDK，请尽快升级到以下版本：&lt;br&gt;
     
     </summary>
     
+      <category term="-Hexo博客" scheme="http://yoursite.com/categories/Hexo%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="-NexT主题" scheme="http://yoursite.com/tags/NexT%E4%B8%BB%E9%A2%98/"/>
     
   </entry>
   
@@ -129,7 +130,7 @@
     <link href="http://yoursite.com/2019/02/23/hello-world/"/>
     <id>http://yoursite.com/2019/02/23/hello-world/</id>
     <published>2019-02-23T11:51:32.082Z</published>
-    <updated>2019-02-23T14:39:53.716Z</updated>
+    <updated>2019-02-25T09:38:20.336Z</updated>
     
     <summary type="html">
     
@@ -137,7 +138,7 @@
       
         
         
-          &lt;p&gt;Hello, it’s my first blog and welcome to my blog.&lt;br&gt;By the way, I’m glad to grow with you.&lt;br&gt;   
+          &lt;p&gt;Hello, it’s my first blog and welcome to my blog.&lt;br&gt;By the way, I’m glad to grow with
         
       
     
